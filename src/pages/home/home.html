@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Tryouts
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row center>
+      <ion-col text-center>
+        <h3 text-center>Select your role</h3>
+        <div>
+          <button ion-button (click)="buttonClicked('registrator')">Registrator</button>
+        </div>
+        <div>
+          <button ion-button (click)="buttonClicked('coach')">Coach</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
