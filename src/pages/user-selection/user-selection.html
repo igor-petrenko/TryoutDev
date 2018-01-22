@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Tryouts
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <h3 text-center padding>Select user</h3>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-select >
+        <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item hidden></ion-item>
+
+  </ion-list>
+
+  <div padding>
+    <button ion-button color="primary" block (click)="signInClick()">Select</button>
+  </div>
+
+  <div padding-horizontal>
+    <button ion-button color="light" block (click)="signInClick()">Register as new user</button>
+  </div>
+
+</ion-content>

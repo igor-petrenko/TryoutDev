@@ -7,10 +7,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TryoutsListPage } from "../pages/tryouts-list/tryouts-list";
+import { LoginPage } from "../pages/login/login";
+import { UserSelectionPage } from "../pages/user-selection/user-selection";
 
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
+    UserSelectionPage,
     HomePage,
     TryoutsListPage
   ],
@@ -21,6 +25,8 @@ import { TryoutsListPage } from "../pages/tryouts-list/tryouts-list";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
+    UserSelectionPage,
     HomePage,
     TryoutsListPage
   ],
