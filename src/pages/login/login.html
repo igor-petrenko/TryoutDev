@@ -15,12 +15,12 @@
 
     <ion-item>
       <ion-label floating>Team name</ion-label>
-      <ion-input [(ngModel)]="teamName" type="text"></ion-input>
+      <ion-input [(ngModel)]="teamName" #loginInput="ngModel" type="text" required="true"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input [(ngModel)]="password" type="password"></ion-input>
+      <ion-input [(ngModel)]="password" #passInput="ngModel" type="password" required></ion-input>
     </ion-item>
 
     <ion-item hidden></ion-item>
@@ -28,7 +28,7 @@
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block (click)="signInClick()">Sign In</button>
+    <button [disabled]="loginInput.invalid || passInput.invalid" ion-button color="primary" block (click)="signInClick()">Sign In</button>
   </div>
 
 </ion-content>

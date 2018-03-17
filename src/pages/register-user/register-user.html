@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register as new user</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label floating>First name</ion-label>
+      <ion-input type="text" [(ngModel)]="firstName" name="firstname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Last name</ion-label>
+      <ion-input [(ngModel)]="lastName" name="lastname" required></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button type="submit" block>Register</button>
+    </div>
+    <div padding-horizontal>
+      <button ion-button color="light" block (click)="cancelRegister()">Cancel</button>
+    </div>
+
+  </form>
+
+</ion-content>
