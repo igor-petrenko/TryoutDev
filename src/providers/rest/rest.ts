@@ -18,11 +18,12 @@ export class RestProvider {
 
 
   getUsers() {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl + '/users').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
+        reject();
       });
     });
   }

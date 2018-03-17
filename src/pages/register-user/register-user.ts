@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RestProvider } from "../../providers/rest/rest";
 import { UserSelectionPage } from "../user-selection/user-selection";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -13,7 +13,7 @@ export class RegisterUserPage {
   public firstName: string;
   public lastName: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private api: RestProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private user: UserProvider) {
     this.firstName = "";
     this.lastName = "";
   }
@@ -23,7 +23,7 @@ export class RegisterUserPage {
       // TODO: show empty fields message
       return;
     }
-    this.api.addUser({"firstName": this.firstName, "lastName": this.lastName})
+    this.user.registerNewUser({"firstName": this.firstName, "lastName": this.lastName})
       .then(response => {
         console.log('response: ', response);
         this.navCtrl.pop();

@@ -11,6 +11,7 @@ import { TryoutsListPage } from "../pages/tryouts-list/tryouts-list";
 import { LoginPage } from "../pages/login/login";
 import { UserSelectionPage } from "../pages/user-selection/user-selection";
 import { RestProvider } from '../providers/rest/rest';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RestProvider } from '../providers/rest/rest';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider
+    RestProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
