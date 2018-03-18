@@ -1,5 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from "../user/user";
+import { Observable } from "rxjs/Observable";
+import { Tryout } from "../tryouts/tryouts";
 
 /*
   Generated class for the RestProvider provider.
@@ -17,29 +20,26 @@ export class RestProvider {
   }
 
 
-  getUsers() {
-    return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + '/users').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-        reject();
-      });
-    });
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + '/users');
   }
 
-  addUser(data) {
-    return new Promise((resolve, reject) => {
-      // this.http.post(this.apiUrl + '/users', JSON.stringify(data), {
-      //   headers: new HttpHeaders().set('Authorization', 'my-auth-token'),
-      //   params: new HttpParams().set('id', '3')
-      // })
-      this.http.post(this.apiUrl + '/users', JSON.stringify(data))
-        .subscribe(res => {
-          resolve(res);
-        }, (err) => {
-          reject(err);
-        });
-    });
+  addUser(data: User) {
+    // this.http.post(this.apiUrl + '/users', JSON.stringify(data), {
+    //   headers: new HttpHeaders().set('Authorization', 'my-auth-token'),
+    //   params: new HttpParams().set('id', '3')
+    // })
+    return this.http.post(this.apiUrl + '/users', JSON.stringify(data))
   }
+
+
+  getTryouts(): Observable<Tryout[]> {
+    return this.http.get<Tryout[]>(this.apiUrl + '/tryouts');
+  }
+
+  createNewTryout(data: Tryout) {
+    return this.http.post(this.apiUrl + '/tryouts', JSON.stringify(data))
+  }
+
+
 }

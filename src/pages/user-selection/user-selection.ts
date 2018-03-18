@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from "../login/login";
-import { UserProvider } from "../../providers/user/user";
+import { User, UserProvider } from "../../providers/user/user";
+import { ChooseModePage } from "../choose-mode/choose-mode";
 
 
 @Component({
@@ -10,26 +11,40 @@ import { UserProvider } from "../../providers/user/user";
 })
 export class UserSelectionPage {
 
-  public users: any;
+  public users: User[];
   public selectedUserId: number;
 
   constructor(public navCtrl: NavController, public user: UserProvider) {
     this.users = [];
     this.selectedUserId = null;
+
+    //TODO: current code used for automatically forwarding to a ChooseModePage on app start.
+    // This method is not good because user will see a page transition animation.
+    // Maybe will be better to forward to a ChooseModePage in app.component.ts
+
+    // let userData = JSON.parse(localStorage.getItem('selectedUser'));
+    // if (userData) {
+    //   this.selectedUserId = userData.id;
+    //   this.user.setSelected(userData);
+    //   this.navCtrl.push(ChooseModePage);
+    // }
   }
 
   ionViewWillEnter () {
-    this.user.getAllUsers()
-      .then(data => {
-        this.users = data;
-        console.log(this.users);
-      });
+    this.user.getAllUsers().subscribe(usersList => {
+      this.users = usersList;
+      console.log("All users: ", this.users);
+    }, err => {
+      //TODO: handle error received from server
+    });
   }
 
   public selectUser () {
     if (this.selectedUserId) {
-      this.user.setSelected(this.getUserDataById(Number(this.selectedUserId)));
-
+      let userData = this.getUserDataById(Number(this.selectedUserId));
+      localStorage.setItem('selectedUser', JSON.stringify(userData));
+      this.user.setSelected(userData);
+      this.navCtrl.push(ChooseModePage);
     }
   }
 
@@ -47,7 +62,9 @@ export class UserSelectionPage {
 
   private signOut () {
     this.navCtrl.setRoot(LoginPage).then(data => {
-      this.user.clearUser();
+      this.user.clearSelectedUser();
+      localStorage.setItem('teamName', '');
+      localStorage.setItem('selectedUser', '');
     });
   }
 

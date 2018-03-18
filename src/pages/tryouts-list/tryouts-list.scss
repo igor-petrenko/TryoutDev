@@ -1,6 +1,18 @@
-page-home {
-  ion-grid {
+page-tryouts-list {
+  .page-content-wrap {
+    width: 100%;
     height: 100%;
-    justify-content: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .page-header {
+      width: 100%;
+      text-align: center;
+    }
+
+    .tryouts-wrap {
+      flex: 1;
+    }
   }
 }

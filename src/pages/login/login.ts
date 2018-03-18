@@ -37,6 +37,7 @@ export class LoginPage implements OnInit {
   }
 
   private signIn () {
+    localStorage.setItem('teamName', this.teamName);
     this.navCtrl.setRoot(UserSelectionPage).then(function () {
       // this.clearForm();
     });

@@ -31,7 +31,7 @@ export class UserProvider {
     this.selectedUser = data;
   }
 
-  public clearUser () {
+  public clearSelectedUser () {
     this.selectedUser = null;
   }
 

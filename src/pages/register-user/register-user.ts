@@ -24,16 +24,17 @@ export class RegisterUserPage {
       return;
     }
     this.user.registerNewUser({"firstName": this.firstName, "lastName": this.lastName})
-      .then(response => {
-        console.log('response: ', response);
-        this.navCtrl.pop();
-        // TODO: find a way to update users list in UserSelectionPage
-        // TODO: go to "Choose mode" page
-        this.clearForm();
-      })
-      .catch(error => {
-        // TODO: handle and show error
-      });
+      .subscribe(
+        response => {
+          console.log('response: ', response);
+          this.navCtrl.pop();
+          // TODO: find a way to update users list in UserSelectionPage
+          // TODO: go to "Choose mode" page
+          this.clearForm();
+        },
+        error => {
+          // TODO: handle and show error
+        });
   }
 
   public cancelRegister () {

@@ -6,19 +6,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from "@angular/common/http";
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { TryoutsListPage } from "../pages/tryouts-list/tryouts-list";
 import { LoginPage } from "../pages/login/login";
 import { UserSelectionPage } from "../pages/user-selection/user-selection";
 import { RestProvider } from '../providers/rest/rest';
 import { UserProvider } from '../providers/user/user';
+import { ChooseModePage } from "../pages/choose-mode/choose-mode";
+import { TryoutsProvider } from '../providers/tryouts/tryouts';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     UserSelectionPage,
-    HomePage,
+    ChooseModePage,
     TryoutsListPage
   ],
   imports: [
@@ -31,7 +32,7 @@ import { UserProvider } from '../providers/user/user';
     MyApp,
     LoginPage,
     UserSelectionPage,
-    HomePage,
+    ChooseModePage,
     TryoutsListPage
   ],
   providers: [
@@ -39,7 +40,8 @@ import { UserProvider } from '../providers/user/user';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
-    UserProvider
+    UserProvider,
+    TryoutsProvider
   ]
 })
 export class AppModule {}
