@@ -1,0 +1,13 @@
+<ion-card>
+
+  <ion-card-content (click)="openTryout()">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4 col-md-2 col-lg-2>{{tryoutDate|date}}</ion-col>
+        <ion-col>{{tryoutName}}</ion-col>
+        <ion-col [ngClass]="(tryoutStatus === 'closed') ? 'closed-tryout' : 'opened-tryout'" col-3 col-md-2 col-lg-2 text-right>{{tryoutStatus}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+</ion-card>

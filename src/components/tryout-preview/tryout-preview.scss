@@ -1,0 +1,13 @@
+tryout-preview {
+  ion-card-content.card-content {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .closed-tryout {
+      color: red;
+    }
+    .opened-tryout {
+      color: green;
+    }
+  }
+}

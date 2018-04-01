@@ -13,6 +13,8 @@ import { RestProvider } from '../providers/rest/rest';
 import { UserProvider } from '../providers/user/user';
 import { ChooseModePage } from "../pages/choose-mode/choose-mode";
 import { TryoutsProvider } from '../providers/tryouts/tryouts';
+import { ComponentsModule } from "../components/components.module";
+import { PlayersProvider } from '../providers/players/players';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { TryoutsProvider } from '../providers/tryouts/tryouts';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -41,7 +44,8 @@ import { TryoutsProvider } from '../providers/tryouts/tryouts';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
     UserProvider,
-    TryoutsProvider
+    TryoutsProvider,
+    PlayersProvider
   ]
 })
 export class AppModule {}

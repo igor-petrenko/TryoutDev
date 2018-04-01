@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from "../user/user";
 import { RestProvider } from "../rest/rest";
+import { Observable } from "rxjs/Observable";
+import { of } from "rxjs/observable/of";
 
 
 export class Tryout {
@@ -22,8 +23,16 @@ export class TryoutsProvider {
 
   }
 
-  public loadAllTryouts() {
-    return this.api.getTryouts();
+  public loadAllTryouts(): Observable<Tryout[]> {
+    let tryouts = JSON.parse(localStorage.getItem('tryouts'));
+    if (!tryouts) {
+      tryouts = [{id: 1, date: '2017-03-03', name: "Spring 2017", status: 'closed'},{id: 2, date: '2017-10-15', name: "Autumn 2017", status: 'opened'}];
+      localStorage.setItem('tryouts', JSON.stringify(tryouts));
+    }
+    this.tryoutsList = tryouts;
+    return of(tryouts);
+
+    // return this.api.getTryouts();
   }
 
   public getSelected (): Tryout {
@@ -40,8 +49,18 @@ export class TryoutsProvider {
     this.selectedTryout = null;
   }
 
-  public createNewTryout (data: Tryout) {
-    return this.api.createNewTryout(data);
+  public createNewTryout (data) {
+    let tryouts = JSON.parse(localStorage.getItem('tryouts'));
+    if (!tryouts) {
+      tryouts = [];
+    }
+    data.id = tryouts[tryouts.length - 1].id + 1;
+    data.status = 'opened';
+    tryouts.push(data);
+    localStorage.setItem('tryouts', JSON.stringify(tryouts));
+
+    return of({status: 'success'});
+    // return this.api.createNewTryout(data);
   }
 
 }

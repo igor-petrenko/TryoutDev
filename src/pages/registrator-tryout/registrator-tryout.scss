@@ -1,0 +1,16 @@
+page-registrator-tryout {
+  .players-list {
+    ion-item {
+      padding-left: 0;
+    }
+    ion-label {
+      margin-right: 0;
+    }
+    ion-item ion-col {
+      flex-grow: 0;
+    }
+    ion-item .flex-full {
+      flex: 1;
+    }
+  }
+}

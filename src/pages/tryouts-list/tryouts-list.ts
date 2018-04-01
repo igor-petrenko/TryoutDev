@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Tryout, TryoutsProvider } from "../../providers/tryouts/tryouts";
 import { User, UserProvider } from "../../providers/user/user";
+import { TryoutCreatePage } from "../tryout-create/tryout-create";
 
 @Component({
   selector: 'page-tryouts-list',
@@ -21,18 +22,32 @@ export class TryoutsListPage {
   }
 
   ionViewDidLoad () {
+
+  }
+
+  ionViewWillEnter() {
     this.user = this.users.getSelected();
 
-
     this.tryouts.loadAllTryouts().subscribe(tryouts => {
-      this.tryoutsList = tryouts;
+      this.tryoutsList = this.sortTryouts(tryouts);
+      // this.tryoutsList = tryouts;
+      console.log('all tryouts: ', this.tryoutsList);
     }, err => {
       //TODO: handle response error
     });
   }
 
+  private sortTryouts (tryouts) {
+    let sortedList = [];
+
+    sortedList = tryouts.sort((a, b) => {
+      return new Date(a.date) < new Date(b.date);
+    });
+
+    return sortedList;
+  }
 
   public createTryoutClick () {
-
+    this.navCtrl.push("TryoutCreatePage");
   }
 }

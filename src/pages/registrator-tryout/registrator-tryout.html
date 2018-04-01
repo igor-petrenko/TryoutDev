@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{tryout.name}} tryout</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list class="players-list">
+    <ion-item-sliding *ngFor="let player of playersList">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{player.image}}">
+        </ion-avatar>
+        <ion-row justify-content-end align-items-center>
+          <ion-col class="flex-full">
+            <h2>{{player.name}}</h2>
+            <p>{{player.position}}</p>
+          </ion-col>
+          <ion-col><p>Age: {{player.age}}</p></ion-col>
+          <ion-col><p>Shirt: {{player.shirt}}</p></ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary">
+          <ion-icon name="open"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <!--<div class="players-list">-->
+    <!--<ion-card *ngFor="let player of playersList" class="player-item-preview">-->
+
+      <!--<ion-card-content >-->
+        <!--<ion-grid>-->
+          <!--<ion-row>-->
+            <!--<ion-col col-3><img src="{{player.image}}" alt=""></ion-col>-->
+            <!--<ion-col col-1>{{player.shirt}}</ion-col>-->
+            <!--<ion-col col-4>{{player.name}}</ion-col>-->
+            <!--<ion-col col-1>{{player.age}}</ion-col>-->
+            <!--<ion-col col-3>{{player.position}}</ion-col>-->
+          <!--</ion-row>-->
+        <!--</ion-grid>-->
+      <!--</ion-card-content>-->
+
+    <!--</ion-card>-->
+  <!--</div>-->
+</ion-content>
+
+<ion-footer>
+  <ion-row padding-horizontal>
+    <ion-col col-6>
+      <button ion-button block >Add player</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button color="danger" block >Close tryout</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

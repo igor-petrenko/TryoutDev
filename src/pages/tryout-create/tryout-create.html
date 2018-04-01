@@ -1,0 +1,36 @@
+<!--
+  Generated template for the TryoutCreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New tryout</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label floating>Tryout name</ion-label>
+      <ion-input type="text" [(ngModel)]="tryoutName" #nameInput="ngModel" name="tryoutName" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Start date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate" name="startDate"></ion-datetime>
+    </ion-item>
+    <div padding>
+      <button [disabled]="nameInput.invalid" ion-button type="submit" block>Create</button>
+    </div>
+    <div padding-horizontal>
+      <button ion-button color="light" block (click)="cancelCreating()">Cancel</button>
+    </div>
+
+  </form>
+
+</ion-content>
