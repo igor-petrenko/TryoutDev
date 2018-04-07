@@ -14,7 +14,7 @@ export class UserProvider {
   private selectedUser: User;
 
   constructor(public http: HttpClient, private api: RestProvider) {
-    this.selectedUser = null;
+    this.selectedUser = JSON.parse(localStorage.getItem('lastSelectedUser')) || null;
   }
 
   public getAllUsers() {
@@ -27,8 +27,8 @@ export class UserProvider {
 
   public setSelected (data) {
     if (!data) return;
-
     this.selectedUser = data;
+    localStorage.setItem('lastSelectedUser', JSON.stringify(this.selectedUser));
   }
 
   public clearSelectedUser () {

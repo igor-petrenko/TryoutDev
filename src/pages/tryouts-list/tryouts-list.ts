@@ -30,7 +30,6 @@ export class TryoutsListPage {
 
     this.tryouts.loadAllTryouts().subscribe(tryouts => {
       this.tryoutsList = this.sortTryouts(tryouts);
-      // this.tryoutsList = tryouts;
       console.log('all tryouts: ', this.tryoutsList);
     }, err => {
       //TODO: handle response error

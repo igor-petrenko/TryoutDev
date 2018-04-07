@@ -41,5 +41,11 @@ export class RestProvider {
     return this.http.post(this.apiUrl + '/tryouts', JSON.stringify(data))
   }
 
+  closeTryout(tryoutId: number) {
+    return this.http.get(this.apiUrl + '/tryouts/remove/' + tryoutId);
+  }
+
+
+
 
 }

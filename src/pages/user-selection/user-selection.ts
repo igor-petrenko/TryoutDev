@@ -30,6 +30,11 @@ export class UserSelectionPage {
     // }
   }
 
+  ionViewDidEnter() {
+    let selected = this.user.getSelected();
+    this.selectedUserId = selected ? selected.id : null;
+  }
+
   ionViewWillEnter () {
     this.user.getAllUsers().subscribe(usersList => {
       this.users = usersList;

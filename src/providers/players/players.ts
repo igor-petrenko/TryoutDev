@@ -10,6 +10,7 @@ export class Player {
   name: string;
   age: number;
   position: string;
+  image: string;
 }
 
 @Injectable()
@@ -23,11 +24,11 @@ export class PlayersProvider {
     let players = JSON.parse(localStorage.getItem('players_' + tryoutId));
     if (!players) {
       players = [
-        {id: 1, shirt: '5', name: "Johnson Smith", age: 11, position: 'Setter', image: 'http://icons-for-free.com/free-icons/png/128/1814089.png'},
-        {id: 2, shirt: '12', name: "Frank Griffin", age: 12, position: 'Middle blocker', image: 'http://icons-for-free.com/free-icons/png/128/1814089.png'},
-        {id: 3, shirt: '56', name: "Linda Mezzano", age: 11, position: 'Setter', image: 'http://icons-for-free.com/free-icons/png/128/1814089.png'},
-        {id: 4, shirt: '90', name: "Jack Richard", age: 13, position: 'Outside hitter', image: 'http://icons-for-free.com/free-icons/png/128/1814089.png'},
-        {id: 5, shirt: '15', name: "Ervin Howell", age: 10, position: 'Right side hitter', image: 'http://icons-for-free.com/free-icons/png/128/1814089.png'}
+        {id: 1, shirt: '5', name: "Johnson Smith", age: 11, position: 'Setter', image: ''},
+        {id: 2, shirt: '12', name: "Frank Griffin", age: 12, position: 'Middle blocker', image: ''},
+        {id: 3, shirt: '56', name: "Linda Mezzano", age: 11, position: 'Setter', image: ''},
+        {id: 4, shirt: '90', name: "Jack Richard", age: 13, position: 'Outside hitter', image: ''},
+        {id: 5, shirt: '15', name: "Ervin Howell", age: 10, position: 'Right side hitter', image: ''}
       ];
       localStorage.setItem('players_' + tryoutId, JSON.stringify(players));
     }
@@ -42,13 +43,29 @@ export class PlayersProvider {
       players = [];
     }
     playerData.id = players[players.length - 1].id + 1;
-    playerData.image = 'http://icons-for-free.com/free-icons/png/128/1814089.png';
     players.push(playerData);
     localStorage.setItem('players_' + tryoutId, JSON.stringify(players));
 
     return of({status: 'success'});
 
     // return this.api.addNewPlayer(tryoutId, playerData);
+  }
+
+  public removePlayer (tryoutId, playerId: number) {
+    let players = JSON.parse(localStorage.getItem('players_' + tryoutId));
+    if (!players) {
+      players = [];
+    }
+    for (var i = 0; i < players.length; i++) {
+      if (players[i].id === playerId) {
+        players.splice(i, 1);
+        break;
+      }
+    }
+    localStorage.setItem('players_' + tryoutId, JSON.stringify(players));
+
+    return of({status: 'success'});
+    // return this.api.removePlayer(tryoutId, player);
   }
 
 }

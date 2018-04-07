@@ -2,15 +2,39 @@ page-registrator-tryout {
   .players-list {
     ion-item {
       padding-left: 0;
-    }
-    ion-label {
-      margin-right: 0;
-    }
-    ion-item ion-col {
-      flex-grow: 0;
-    }
-    ion-item .flex-full {
-      flex: 1;
+
+      ion-label {
+        margin-right: 0;
+      }
+
+      ion-row.row {
+        //justify-content: flex-start;
+
+        .player-item-first-block {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+
+          h2 {
+            word-break: break-all;
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+          }
+        }
+
+        .player-item-second-block {
+          display: flex;
+          flex-wrap: wrap;
+          flex: 1;
+          justify-content: flex-end;
+          align-items: center;
+
+          p {
+            margin-right: 10px;
+          }
+        }
+      }
     }
   }
 }

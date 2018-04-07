@@ -16,7 +16,6 @@ export class Tryout {
 @Injectable()
 export class TryoutsProvider {
 
-  private tryoutsList: Tryout[];
   private selectedTryout: Tryout;
 
   constructor(public http: HttpClient, private api: RestProvider) {
@@ -29,7 +28,6 @@ export class TryoutsProvider {
       tryouts = [{id: 1, date: '2017-03-03', name: "Spring 2017", status: 'closed'},{id: 2, date: '2017-10-15', name: "Autumn 2017", status: 'opened'}];
       localStorage.setItem('tryouts', JSON.stringify(tryouts));
     }
-    this.tryoutsList = tryouts;
     return of(tryouts);
 
     // return this.api.getTryouts();
@@ -61,6 +59,25 @@ export class TryoutsProvider {
 
     return of({status: 'success'});
     // return this.api.createNewTryout(data);
+  }
+
+  public closeTryout (tryoutId: number) {
+    let tryouts = JSON.parse(localStorage.getItem('tryouts'));
+    if (!tryouts) {
+      tryouts = [];
+    }
+
+    for (var i = 0; i < tryouts.length; i++) {
+      if (tryoutId === tryouts[i].id) {
+        tryouts[i].status = 'closed';
+        break;
+      }
+    }
+    localStorage.setItem('tryouts', JSON.stringify(tryouts));
+
+    return of({status: 'success'});
+
+    // return this.api.closeTryout(tryoutId);
   }
 
 }

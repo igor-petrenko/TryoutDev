@@ -1,0 +1,86 @@
+page-coach-tryout {
+
+  .content-header {
+    margin-bottom: 1rem;
+
+    .content-header-title, .content-header-subtitle {
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .content-header-subtitle {
+      margin-top: 0;
+      color: #898989;
+      font-size: 1em;
+    }
+
+    .filters-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-flow: row wrap;
+
+      .filter {
+        display: flex;
+        align-items: flex-end;
+
+        ion-item.item-block.item-checkbox .item-inner {
+          border-bottom: none!important;
+        }
+
+        ion-label {
+          font-size: 1.3rem;
+        }
+
+        .select-text {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+
+  .players-list {
+    ion-item {
+      padding-left: 0;
+
+      ion-label {
+        margin-right: 0;
+      }
+
+      ion-row.row {
+        //justify-content: flex-start;
+
+        .player-item-first-block {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+
+          h2 {
+            word-break: break-all;
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+          }
+        }
+
+        .player-item-second-block {
+          display: flex;
+          flex-wrap: wrap;
+          flex: 1;
+          justify-content: flex-end;
+          align-items: center;
+
+          p {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    //ion-item ion-col {
+    //  flex-grow: 0;
+    //}
+    //ion-item .flex-full {
+    //  flex: 1;
+    //}
+  }
+}

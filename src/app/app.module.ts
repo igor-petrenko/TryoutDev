@@ -15,6 +15,10 @@ import { ChooseModePage } from "../pages/choose-mode/choose-mode";
 import { TryoutsProvider } from '../providers/tryouts/tryouts';
 import { ComponentsModule } from "../components/components.module";
 import { PlayersProvider } from '../providers/players/players';
+import { File } from "@ionic-native/file";
+import { Transfer } from "@ionic-native/transfer";
+import { Camera } from "@ionic-native/camera";
+import { FilePath } from "@ionic-native/file-path";
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { PlayersProvider } from '../providers/players/players';
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
     UserProvider,

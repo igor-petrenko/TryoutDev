@@ -1,0 +1,82 @@
+<!--
+  Generated template for the CoachTryoutPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{tryout.name}} tryout</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="content-header">
+    <h2 class="content-header-title">Coach {{coach.name}}</h2>
+    <h6 *ngIf="pageMode === 'comments'" class="content-header-subtitle">Filter and choose a player</h6>
+    <h6 *ngIf="pageMode === 'suggestions'" class="content-header-subtitle">Team suggestions</h6>
+
+    <div class="filters-wrapper" *ngIf="pageMode === 'comments'">
+      <div class="filter">
+        <ion-item>
+          <ion-label floating>Age</ion-label>
+          <ion-select [(ngModel)]="applyedFiltersData.age">
+            <ion-option *ngFor="let age of allFiltersData.age" value="{{age}}">{{age}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="filter">
+        <ion-item>
+          <ion-label floating>Position</ion-label>
+          <ion-select [(ngModel)]="applyedFiltersData.position">
+            <ion-option *ngFor="let position of allFiltersData.position" value="{{position}}">{{position}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="filter">
+        <ion-item>
+          <ion-label>With comments</ion-label>
+          <ion-checkbox [(ngModel)]="applyedFiltersData.withComments"></ion-checkbox>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+
+  <ion-list class="players-list">
+    <ng-container *ngFor="let player of playersList">
+      <ion-item
+        *ngIf="(player.age == applyedFiltersData.age || applyedFiltersData.age === 'all')
+            && (player.position === applyedFiltersData.position || applyedFiltersData.position === 'all')
+            && ((applyedFiltersData.withComments && player.comments && player.comments.length)
+                || !applyedFiltersData.withComments)"
+        (click)="openPlayerDetails(player)">
+        <ion-avatar item-start>
+          <img src="{{player.image || 'assets/imgs/player_ph.png'}}" onError="src = 'assets/imgs/player_ph.png'">
+        </ion-avatar>
+        <ion-row align-items-center>
+          <div class="player-item-first-block">
+            <h2>{{player.name}}</h2>
+            <p>{{player.position}}</p>
+          </div>
+          <div class="player-item-second-block">
+            <p>Age: {{player.age}}</p>
+            <p>Shirt: {{player.shirt}}</p>
+          </div>
+        </ion-row>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="tryout.status === 'opened' && pageMode === 'suggestions'">
+  <ion-row padding-horizontal>
+    <ion-col col-8 offset-2>
+      <button ion-button block (click)="newTeamSuggestion()">New team suggestion</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

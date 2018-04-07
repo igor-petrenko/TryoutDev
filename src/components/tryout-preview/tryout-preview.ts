@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { RegistratorTryoutPage } from "../../pages/registrator-tryout/registrator-tryout";
+import { CoachActionSelectionPage } from "../../pages/coach-action-selection/coach-action-selection";
 
 
 @Component({
@@ -20,10 +21,20 @@ export class TryoutPreviewComponent {
 
   openTryout () {
     if (this.userMode === "registrator") {
-      this.navCtrl.push("RegistratorTryoutPage", {id: this.tryoutId, name: this.tryoutName, date: this.tryoutDate, status: this.tryoutStatus});
+      this.navCtrl.push("RegistratorTryoutPage", {
+        id: this.tryoutId,
+        name: this.tryoutName,
+        date: this.tryoutDate,
+        status: this.tryoutStatus
+      });
     }
-    else {
-
+    else if (this.userMode === "coach") {
+      this.navCtrl.push("CoachActionSelectionPage", {
+        id: this.tryoutId,
+        name: this.tryoutName,
+        date: this.tryoutDate,
+        status: this.tryoutStatus
+      });
     }
   }
 }
