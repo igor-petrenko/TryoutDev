@@ -1,0 +1,116 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title *ngIf="mode === 'create'">Add Player</ion-title>
+    <ion-title *ngIf="mode === 'edit'">Edit Player</ion-title>
+    <ion-title *ngIf="mode === 'comments' || mode === 'suggestions'">{{player.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ng-container *ngIf="mode === 'edit' || mode === 'create'">
+    <form #form="ngForm" novalidate>
+      <ion-item text-center>
+        <img name="image" (tap)="captureImage()" class="player-image"
+             [src]="player.image ? player.image : 'assets/imgs/player_ph.png'" onError="src = 'assets/imgs/player_ph.png'"/>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Name</ion-label>
+        <ion-input type="text" required [(ngModel)]="player.name" name="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Age</ion-label>
+        <ion-input type="number" [(ngModel)]="player.age" name="age"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Shirt</ion-label>
+        <ion-input type="number" [(ngModel)]="player.shirt" name="shirt"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Position</ion-label>
+        <ion-select [(ngModel)]="player.position" name="position">
+          <ion-option *ngFor="let position of positions" [value]="position">{{position}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div padding>
+        <button ion-button type="submit" block (click)="submitForm()">Save</button>
+        <button ion-button color="danger" (click)="removePlayer()" *ngIf="mode === 'edit'" block>Delete record</button>
+        <button ion-button color="light" (click)="cancelEditing()" block>Cancel</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'comments' || mode === 'suggestions'">
+
+    <ion-item text-center no-lines>
+      <img name="image" class="player-image"
+           [src]="player.image ? player.image : 'assets/imgs/player_ph.png'" onError="src = 'assets/imgs/player_ph.png'"/>
+    </ion-item>
+
+    <ion-item>
+      <div class="player-data-row">
+        <div class="data-row-label">Name</div>
+        <div class="data-row-content">{{player.name}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="player-data-row">
+        <div class="data-row-label">Age</div>
+        <div class="data-row-content">{{player.age}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="player-data-row">
+        <div class="data-row-label">Shirt</div>
+        <div class="data-row-content">{{player.shirt}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="player-data-row">
+        <div class="data-row-label">Position</div>
+        <div class="data-row-content">{{player.position}}</div>
+      </div>
+    </ion-item>
+
+    <ion-item *ngIf="suggestion">
+      <div class="player-data-row">
+        <div class="data-row-label">Suggested to position</div>
+        <div class="data-row-content">{{suggestion.suggest}}</div>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="comments-block">
+        <div class="comments-block-header">Comments</div>
+        <ng-container *ngIf="comments && comments.length > 0">
+          <div class="comment-item" *ngFor="let comment of comments" (click)="openComment(comment)">
+            <div class="comment-date">{{comment.date}}</div>
+            <div class="truncate comment-content">{{comment.comment}}</div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="!comments || comments.length === 0">
+          <div class="empty-comments">No comments</div>
+        </ng-container>
+
+      </div>
+    </ion-item>
+
+  </ng-container>
+
+
+</ion-content>
+
+<ion-footer *ngIf="mode === 'comments' || mode === 'suggestions'">
+  <ion-row padding-horizontal>
+    <ion-col col-6>
+      <button ion-button block (click)="suggestPlayer()">Suggest</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button block (click)="openComment()">New comment</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

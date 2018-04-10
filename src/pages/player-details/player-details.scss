@@ -1,0 +1,57 @@
+page-player-details {
+
+  img.player-image {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .player-data-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .data-row-label {
+      font-size: 1.5rem;
+      color: #807f7f;
+    }
+
+  }
+
+  .comments-block {
+    margin-top: 2rem;
+
+    .comments-block-header {
+      font-size: 2rem;
+      color: #606060;
+      padding-bottom: 0.7rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid lightblue;
+    }
+
+    .empty-comments {
+      padding: 2rem 2rem 0;
+      color: gray;
+    }
+
+    .comment-item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: initial;
+      padding: 1rem 0;
+
+      .comment-date {
+        font-size: 1.5rem;
+        color: gray;
+        margin-right: 1.5rem;
+      }
+
+      .truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

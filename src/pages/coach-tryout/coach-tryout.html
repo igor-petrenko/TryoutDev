@@ -46,30 +46,55 @@
     </div>
   </div>
 
-  <ion-list class="players-list">
-    <ng-container *ngFor="let player of playersList">
-      <ion-item
-        *ngIf="(player.age == applyedFiltersData.age || applyedFiltersData.age === 'all')
+  <ng-container *ngIf="pageMode === 'comments'">
+    <ion-list class="players-list">
+      <ng-container *ngFor="let player of playersList">
+        <ion-item
+          *ngIf="(player.age == applyedFiltersData.age || applyedFiltersData.age === 'all')
             && (player.position === applyedFiltersData.position || applyedFiltersData.position === 'all')
             && ((applyedFiltersData.withComments && player.comments && player.comments.length)
                 || !applyedFiltersData.withComments)"
-        (click)="openPlayerDetails(player)">
-        <ion-avatar item-start>
-          <img src="{{player.image || 'assets/imgs/player_ph.png'}}" onError="src = 'assets/imgs/player_ph.png'">
-        </ion-avatar>
-        <ion-row align-items-center>
-          <div class="player-item-first-block">
-            <h2>{{player.name}}</h2>
-            <p>{{player.position}}</p>
-          </div>
-          <div class="player-item-second-block">
-            <p>Age: {{player.age}}</p>
-            <p>Shirt: {{player.shirt}}</p>
-          </div>
-        </ion-row>
-      </ion-item>
-    </ng-container>
-  </ion-list>
+          (click)="openPlayerDetails(player)">
+          <ion-avatar item-start>
+            <img src="{{player.image || 'assets/imgs/player_ph.png'}}" onError="src = 'assets/imgs/player_ph.png'">
+          </ion-avatar>
+          <ion-row align-items-center>
+            <div class="player-item-first-block">
+              <h2>{{player.name}}</h2>
+              <p>{{player.position}}</p>
+            </div>
+            <div class="player-item-second-block">
+              <p>Age: {{player.age}}</p>
+              <p>Shirt: {{player.shirt}}</p>
+            </div>
+          </ion-row>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </ng-container>
+
+  <ng-container *ngIf="pageMode === 'suggestions'">
+    <ion-list class="players-list">
+      <ng-container *ngFor="let player of playersList">
+        <ion-item (click)="openPlayerDetails(player)">
+          <ion-avatar item-start>
+            <img src="{{player.image || 'assets/imgs/player_ph.png'}}" onError="src = 'assets/imgs/player_ph.png'">
+          </ion-avatar>
+          <ion-row align-items-center>
+            <div class="player-item-first-block">
+              <h2>{{player.name}}</h2>
+              <p>{{player.suggestedPosition}}</p>
+            </div>
+            <div class="player-item-second-block">
+              <p>Age: {{player.age}}</p>
+              <p>Shirt: {{player.shirt}}</p>
+            </div>
+          </ion-row>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </ng-container>
+
 
 </ion-content>
 

@@ -3,6 +3,7 @@ import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-an
 import { Tryout } from "../../providers/tryouts/tryouts";
 import { User, UserProvider } from "../../providers/user/user";
 import { Player, PlayersProvider } from "../../providers/players/players";
+import { PlayerDetailsPage } from "../player-details/player-details";
 
 /**
  * Page with a list of players of selected tryout.
@@ -45,13 +46,32 @@ export class CoachTryoutPage {
     });
     loading.present();
 
+
     this.players.getTryoutPlayers(this.tryout.id).subscribe(
-      response => {
-        this.playersList = response;
-        this.parseAllFiltersData();
-        this.checkFiltersCorrect();
-        loading.dismissAll();
-        console.log("players list: ", this.playersList);
+      playersListResponse => {
+        if (this.pageMode === 'comments') {
+          this.playersList = playersListResponse;
+          this.parseAllFiltersData();
+          this.checkFiltersCorrect();
+          loading.dismissAll();
+        }
+        else if (this.pageMode === 'suggestions') {
+          this.players.getTeamSuggestions(this.coach.id, this.tryout.id).subscribe(
+            suggestions => {
+              let suggestedPlayerIds = suggestions.map(suggestion => suggestion.playerId);
+              let parsedPlayers = playersListResponse.filter(player => suggestedPlayerIds.indexOf(player.id) !== -1);
+
+              this.playersList = parsedPlayers.map(player => {
+                if (suggestedPlayerIds.indexOf(player.id) !== -1) {
+                  player.suggestedPosition = suggestions.find(item => item.playerId === player.id).suggest;
+                  return player;
+                }
+                return null;
+              });
+              loading.dismissAll();
+            }
+          );
+        }
       },
       err => {
 
@@ -96,14 +116,15 @@ export class CoachTryoutPage {
 
 
   openPlayerDetails(player: Player) {
-    if (this.tryout.status !== 'opened') {
-      return;
-    }
-    // this.navCtrl.push('PlayerEditPage', {player: player, mode: 'edit', tryoutId: this.tryout.id});
+    this.navCtrl.push('PlayerDetailsPage', {
+      player: player,
+      mode: this.pageMode,
+      tryoutId: this.tryout.id
+    });
   }
 
   newTeamSuggestion() {
-
+    this.navCtrl.push('CoachTryoutPage', {mode: 'comments', tryout: this.tryout});
   }
 
 }

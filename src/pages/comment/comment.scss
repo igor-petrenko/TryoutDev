@@ -1,0 +1,28 @@
+page-comment {
+
+  img.player-image {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .player-data-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .data-row-label {
+      font-size: 1.5rem;
+      color: #807f7f;
+    }
+
+  }
+
+  .item-textarea {
+    ion-label {
+      font-size: 1.5rem!important;
+      color: #807f7f!important;
+    }
+  }
+
+}

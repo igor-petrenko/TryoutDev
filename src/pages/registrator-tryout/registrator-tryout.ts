@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Tryout, TryoutsProvider } from "../../providers/tryouts/tryouts";
 import { Player, PlayersProvider } from "../../providers/players/players";
-import { PlayerEditPage } from "../player-edit/player-edit";
+import { PlayerDetailsPage } from "../player-details/player-details";
 
 /**
  * Generated class for the RegistratorTryoutPage page.
@@ -45,14 +45,14 @@ export class RegistratorTryoutPage {
   }
 
   createPlayer() {
-    this.navCtrl.push('PlayerEditPage', {mode: 'create', tryoutId: this.tryout.id});
+    this.navCtrl.push('PlayerDetailsPage', {mode: 'create', tryoutId: this.tryout.id});
   }
 
   openPlayerDetails(player: Player) {
     if (this.tryout.status !== 'opened') {
       return;
     }
-    this.navCtrl.push('PlayerEditPage', {player: player, mode: 'edit', tryoutId: this.tryout.id});
+    this.navCtrl.push('PlayerDetailsPage', {player: player, mode: 'edit', tryoutId: this.tryout.id});
   }
 
   removePlayer(player: Player) {
